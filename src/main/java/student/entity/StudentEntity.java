@@ -1,5 +1,7 @@
 package student.entity;
 
+import java.util.Objects;
+
 public class StudentEntity {
     int id;
     String firstName;
@@ -60,5 +62,18 @@ public class StudentEntity {
                 ", groupId=" + groupId +
                 '}';
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentEntity student = (StudentEntity) o;
+        return id == student.id && groupId == student.groupId && Objects.equals(firstName, student.firstName) && Objects.equals(secondName, student.secondName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, secondName, groupId);
     }
 }

@@ -39,12 +39,18 @@ public final class ConnectionManager {
        int size = poolSize == null ? DEFAULT_POOL_SIZE : Integer.parseInt(poolSize);
        pool = new ArrayBlockingQueue<>(size);
        for (int i = 0; i < size; i++){
-           Connection connection = open();
+           Connection connection;
+           try {
+               connection = open();
+           } catch (DaoException e) {
+               throw new RuntimeException(e);
+           }
+           Connection finalConnection = connection;
            Connection proxyConnection = (Connection)Proxy.newProxyInstance(ConnectionManager.class.getClassLoader(),
                    new Class[]{Connection.class},
                    (proxy, method, args) -> method.getName().equals("close")
                            ? pool.add((Connection) proxy)
-                           : method.invoke(connection, args));
+                           : method.invoke(finalConnection, args));
            pool.add(proxyConnection);
        }
     }
@@ -57,7 +63,7 @@ public final class ConnectionManager {
         }
     }
 
-    private static Connection open(){
+    private static Connection open() throws DaoException {
         try {
             return DriverManager.getConnection(
                     PropertiesUtil.get(URL_KEY),
