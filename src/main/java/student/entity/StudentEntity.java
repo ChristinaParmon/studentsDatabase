@@ -1,21 +1,19 @@
 package student.entity;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class StudentEntity {
-    int id;
-    String firstName;
-    String secondName;
-    int groupId;
+    private int id;
+    private String firstName;
+    private String secondName;
+    private int groupId;
 
     public StudentEntity(int id, String firstName, String secondName, int groupId) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.groupId = groupId;
-    }
-
-    public StudentEntity() {
     }
 
     public int getId() {
@@ -51,24 +49,21 @@ public class StudentEntity {
         this.groupId = groupId;
     }
 
-
-
     @Override
     public String toString() {
-        return "StudentEntity: " +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", groupId=" + groupId +
-                '}';
-
+        return new StringJoiner(", ", StudentEntity.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("first name=" + firstName)
+                .add("second name=" + secondName)
+                .add("group Id=" + groupId)
+                .toString();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StudentEntity student = (StudentEntity) o;
+    public boolean equals(Object anotherStudent) {
+        if (this == anotherStudent) return true;
+        if (anotherStudent == null || getClass() != anotherStudent.getClass()) return false;
+        StudentEntity student = (StudentEntity) anotherStudent;
         return id == student.id && groupId == student.groupId && Objects.equals(firstName, student.firstName) && Objects.equals(secondName, student.secondName);
     }
 

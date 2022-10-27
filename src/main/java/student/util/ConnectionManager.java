@@ -1,8 +1,5 @@
 package student.util;
 
-
-
-
 import org.apache.log4j.Logger;
 import student.exception.DaoException;
 import java.lang.reflect.Proxy;
@@ -11,9 +8,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-
-
-
 
 public final class ConnectionManager {
 

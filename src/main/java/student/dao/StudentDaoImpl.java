@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class StudentDaoImpl implements StudentDao{
-    public StudentDaoImpl(){
-
-    }
     private static final String DELETE_STUDENT_SQL = """
             DELETE FROM student
             WHERE id = ?
@@ -77,7 +74,6 @@ public class StudentDaoImpl implements StudentDao{
         }catch (SQLException e){
             throw new DaoException(e);
         }
-
     }
 
     @Override
@@ -88,11 +84,9 @@ public class StudentDaoImpl implements StudentDao{
             preparedStatement.setString(1, year);
             getStudentsByStatement(result, preparedStatement);
             return result;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
-
-
     }
     @Override
     public Optional<StudentEntity> findById(int id) throws DaoException {
@@ -111,7 +105,7 @@ public class StudentDaoImpl implements StudentDao{
                 );
             }
             return Optional.ofNullable(student);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -122,8 +116,8 @@ public class StudentDaoImpl implements StudentDao{
             preparedStatement.setString(1, studentEntity.getFirstName());
             preparedStatement.setString(2, studentEntity.getSecondName());
             preparedStatement.setInt(3, studentEntity.getGroupId());
-
             preparedStatement.setInt(4, studentEntity.getId());
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -178,12 +172,10 @@ public class StudentDaoImpl implements StudentDao{
     }
 
     public void getStudentsByStatement(List<StudentEntity> result, PreparedStatement preparedStatement) throws DaoException {
-        ResultSet resultSet;
-        StudentEntity student;
         try {
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                student = new StudentEntity(
+                StudentEntity student = new StudentEntity(
                         resultSet.getInt("id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("second_name"),

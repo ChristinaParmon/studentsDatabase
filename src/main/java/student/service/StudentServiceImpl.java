@@ -12,8 +12,8 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class StudentServiceImpl implements StudentService{
-    private static final Scanner input = new Scanner(System.in);
-    StudentDao studentDao = new StudentDaoImpl();
+    private final Scanner input = new Scanner(System.in);
+    private final StudentDao studentDao = new StudentDaoImpl();
     @Override
     public List<Integer> getGroupByStudentCount() {
         int count = inputAndValidate("Enter students' number: ", "Input should be a number.");
@@ -84,11 +84,7 @@ public class StudentServiceImpl implements StudentService{
         System.out.println("Input student's lastName: ");
         String secondName = input.nextLine();
 
-        StudentEntity studentEntity = new StudentEntity();
-        studentEntity.setId(id);
-        studentEntity.setFirstName(firstName);
-        studentEntity.setSecondName(secondName);
-        studentEntity.setGroupId(groupId);
+        StudentEntity studentEntity = new StudentEntity(id, firstName, secondName, groupId);
 
         try {
             return studentDao.create(studentEntity);
@@ -110,7 +106,7 @@ public class StudentServiceImpl implements StudentService{
 
 
 
-    private static int inputAndValidate(String message, String validateMessage, Function<Integer, Boolean> validate){
+    private int inputAndValidate(String message, String validateMessage, Function<Integer, Boolean> validate){
         Integer id = null;
 
         do {
@@ -126,7 +122,7 @@ public class StudentServiceImpl implements StudentService{
 
         return id;
     }
-    private static int inputAndValidate(String message, String validateMessage){
+    private int inputAndValidate(String message, String validateMessage){
         return inputAndValidate(message, validateMessage, (value) -> false);
     }
 }
