@@ -12,7 +12,7 @@ public interface StudentDao {
     List<StudentEntity> getStudentGraduateOneYear(String year) throws DaoException;
     List<StudentEntity> getStudentsByAlphabet() throws DaoException;
     Optional<StudentEntity> findById(int id) throws DaoException;
-    void update (StudentEntity studentEntity) throws DaoException;
+    boolean update (StudentEntity studentEntity) throws DaoException;
     boolean create (StudentEntity studentEntity) throws DaoException;
     boolean delete(int id) throws DaoException;
     void getStudentsByStatement(List<StudentEntity> result, PreparedStatement preparedStatement) throws DaoException;

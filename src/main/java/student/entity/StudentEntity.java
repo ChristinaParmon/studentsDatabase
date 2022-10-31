@@ -15,6 +15,8 @@ public class StudentEntity {
         this.secondName = secondName;
         this.groupId = groupId;
     }
+    public StudentEntity(){
+    }
 
     public int getId() {
         return id;

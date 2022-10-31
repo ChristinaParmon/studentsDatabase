@@ -64,7 +64,6 @@ public class StudentDaoImpl implements StudentDao{
         List<Integer> result = new ArrayList<>();
         try (Connection connection = ConnectionManager.get();
              PreparedStatement prepareStatement = connection.prepareStatement(READ_GROUP)){
-
             prepareStatement.setInt(1, count);
             ResultSet resultSet = prepareStatement.executeQuery();
             while (resultSet.next()){
@@ -110,7 +109,7 @@ public class StudentDaoImpl implements StudentDao{
         }
     }
     @Override
-    public void update (StudentEntity studentEntity) throws DaoException {
+    public boolean update (StudentEntity studentEntity) throws DaoException {
         try (Connection connection = ConnectionManager.get();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
             preparedStatement.setString(1, studentEntity.getFirstName());
@@ -119,6 +118,7 @@ public class StudentDaoImpl implements StudentDao{
             preparedStatement.setInt(4, studentEntity.getId());
 
             preparedStatement.executeUpdate();
+            return true;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

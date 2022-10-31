@@ -12,8 +12,18 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class StudentServiceImpl implements StudentService{
-    private final Scanner input = new Scanner(System.in);
-    private final StudentDao studentDao = new StudentDaoImpl();
+    private Scanner input;
+    private StudentDao studentDao;
+
+    public StudentServiceImpl(Scanner input, StudentDao studentDao) {
+        this.input = input;
+        this.studentDao = studentDao;
+    }
+
+    public StudentServiceImpl() {
+        new StudentServiceImpl(new Scanner(System.in), new StudentDaoImpl());
+    }
+
     @Override
     public List<Integer> getGroupByStudentCount() {
         int count = inputAndValidate("Enter students' number: ", "Input should be a number.");
@@ -55,7 +65,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void update() {
+    public boolean update() {
         Optional<StudentEntity> maybeStudent = findById();
         System.out.println("Input student's firstname: ");
         String newName = input.nextLine();
@@ -68,6 +78,7 @@ public class StudentServiceImpl implements StudentService{
                 throw new RuntimeException(e);
             }
         });
+        return true;
     }
 
     @Override

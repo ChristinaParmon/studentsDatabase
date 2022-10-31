@@ -9,7 +9,7 @@ public interface StudentService{
     List<StudentEntity> getStudentGraduateOneYear();
     List<StudentEntity> getStudentsByAlphabet();
     Optional<StudentEntity> findById();
-    void update ();
+    boolean update ();
     boolean create ();
     boolean delete();
 
