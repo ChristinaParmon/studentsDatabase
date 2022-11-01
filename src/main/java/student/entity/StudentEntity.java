@@ -4,21 +4,22 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class StudentEntity {
-    private int id;
+    private long id;
     private String firstName;
     private String secondName;
-    private int groupId;
+    private long groupId;
 
-    public StudentEntity(int id, String firstName, String secondName, int groupId) {
+    public StudentEntity(long id, String firstName, String secondName, long groupId) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.groupId = groupId;
     }
-    public StudentEntity(){
+
+    public StudentEntity() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -30,12 +31,11 @@ public class StudentEntity {
         return secondName;
     }
 
-    public int getGroupId() {
+    public long getGroupId() {
         return groupId;
     }
 
-
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -47,7 +47,7 @@ public class StudentEntity {
         this.secondName = secondName;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(long groupId) {
         this.groupId = groupId;
     }
 
@@ -66,7 +66,10 @@ public class StudentEntity {
         if (this == anotherStudent) return true;
         if (anotherStudent == null || getClass() != anotherStudent.getClass()) return false;
         StudentEntity student = (StudentEntity) anotherStudent;
-        return id == student.id && groupId == student.groupId && Objects.equals(firstName, student.firstName) && Objects.equals(secondName, student.secondName);
+        return id == student.id
+                && groupId == student.groupId
+                && Objects.equals(firstName, student.firstName)
+                && Objects.equals(secondName, student.secondName);
     }
 
     @Override
