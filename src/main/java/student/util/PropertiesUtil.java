@@ -1,4 +1,4 @@
-package student;
+package student.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public final class PropertiesUtil {
     private static final Properties PROPERTIES = new Properties();
-    
+
     static {
         loadProperties();
     }
@@ -19,11 +19,11 @@ public final class PropertiesUtil {
         }
     }
 
-    public static String get(String key){
+    public static String get(String key) {
         return PROPERTIES.getProperty(key);
     }
 
-    private PropertiesUtil(){
-        
+    private PropertiesUtil() {
+
     }
 }
